@@ -3,93 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <!-- Links our HTML structure to the CSS styling file -->
+    <title>Ecutopian Design and Consultancy</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
-    <!-- HEADER: Fixed top bar containing logo and navbar links -->
-    <header class="navbar">
-        <div class="logo">Logo_Placeholder</div>
-        
-        <!-- Hamburger Menu: Hidden on desktop, turns into 3 lines on mobile -->
-        <button class="hamburger" id="hamburger-btn">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-
-        <!-- Navigation Links: Collapses into a mobile menu drawer on small screens -->
-        <nav class="nav-links" id="nav-menu">
-            <a href="#home" class="nav-item">Home</a>
-            <a href="#about" class="nav-item">About Us</a>
-            <a href="#contact" class="nav-item">Contact Us</a>
-            <button class="btn-appointment" id="appointment-btn">Book an Appointment</button>
-        </nav>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">Ecutopian Design and Consultancy</div>
+            <nav class="nav-menu" id="navMenu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
-    <!-- HOME SECTION: Main banner area with background placeholder -->
-    <section id="home" class="hero-section">
-        <div class="bg-placeholder">Home_page_BG</div>
-        <div class="hero-content">
-            <h1>Home_placeholder</h1>
-        </div>
-    </section>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="section-container">
+            <p class="hero-tagline">
+                Our approach combines timeless design principles with vibrant aesthetics and organic materials, ensuring every project is both beautiful and practical.
+            </p>
 
-    <!-- ABOUT US SECTION: Multi-row layout showcasing two placeholder images -->
-    <section id="about" class="about-section">
-        <div class="container">
-            <h2>About_Us_placeholder</h2>
-            
-            <!-- Row 1: Text on left, Image on right -->
-            <div class="about-row">
-                <div class="about-text">
-                    <h3>Row 1 Title</h3>
-                    <p>This is where your text for the first row will go.</p>
+            <!-- Tab Buttons Container -->
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab(event, 'won')">Won</button>
+                <button class="tab-btn" onclick="switchTab(event, 'clients')">Clients</button>
+                <button class="tab-btn" onclick="switchTab(event, 'experience')">Experience</button>
+            </div>
+
+            <!-- Tab Content Dynamic Panels -->
+            <div class="tab-content-wrapper">
+                <div id="won" class="tab-panel active">
+                    <h3>Award-Winning Designs</h3>
+                    <p>Recognized for excellence in blending sustainable architecture with cutting-edge visual aesthetics.</p>
                 </div>
-                <div class="image-placeholder">Row_1_pic</div>
-            </div>
-
-            <!-- Row 2: Image on left, Text on right (handled by CSS grid) -->
-            <div class="about-row reverse">
-                <div class="about-text">
-                    <h3>Row 2 Title</h3>
-                    <p>This is where your text for the second row will go.</p>
+                <div id="clients" class="tab-panel">
+                    <h3>Trusted Client Partnerships</h3>
+                    <p>Collaborating closely with residential and commercial developers to bring green spaces to life.</p>
                 </div>
-                <div class="image-placeholder">Row_2_pic</div>
+                <div id="experience" class="tab-panel">
+                    <h3>Years of Industry Expertise</h3>
+                    <p>Over a decade of master planning, interior staging, and organic material sourcing expertise.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT & SUBSCRIBE SECTION: Form inputs and contact information -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2>Contact_Us_placeholder</h2>
+    <!-- CTA & Contact Section -->
+    <section id="contact" class="cta-section">
+        <div class="section-container">
+            <h2 class="cta-heading">Ready to transform your space?</h2>
+            <p class="cta-subtext">Let's turn your vision into reality. Our team is ready to craft the perfect environment tailored exactly to your vision.</p>
             
-            <!-- Newsletter Sign up feature -->
-            <div class="subscribe-box">
-                <h3>Subscribe to our News</h3>
-                <form id="subscribe-form">
-                    <input type="email" id="email-input" placeholder="Enter your email" required>
-                    <button type="submit" class="btn-submit">Subscribe</button>
-                </form>
-                <!-- This message changes dynamically via javascript when submitted -->
-                <p id="subscribe-status" class="status-msg"></p>
-            </div>
+            <!-- Google Sheets Linked Web App Email Form -->
+            <form id="emailCaptureForm" class="contact-form">
+                <input type="email" id="userEmail" name="email" placeholder="Enter your email address" required aria-label="Email Address">
+                <button type="submit" class="cta-btn">Submit</button>
+            </form>
+            <div id="formFeedback" class="form-feedback"></div>
         </div>
     </section>
 
-    <!-- APPOINTMENT POPUP: Hidden modal window that appears upon clicking booking button -->
-    <div id="appointment-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="close-modal">&times;</span>
-            <h2>Book_an_Appointment_Placeholder</h2>
-            <p>Your appointment form or scheduler widget goes here.</p>
-        </div>
-    </div>
+    <!-- Floating Messenger Chat Button -->
+    <a href="https://m.me" class="messenger-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on Messenger">
+        <i class="fab fa-facebook-messenger"></i>
+    </a>
 
-    <!-- Links our logic functions to the JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
