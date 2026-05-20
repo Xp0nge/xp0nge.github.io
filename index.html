@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <!-- Links our HTML structure to the CSS styling file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- HEADER: Fixed top bar containing logo and navbar links -->
+    <header class="navbar">
+        <div class="logo">Logo_Placeholder</div>
+        
+        <!-- Hamburger Menu: Hidden on desktop, turns into 3 lines on mobile -->
+        <button class="hamburger" id="hamburger-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <!-- Navigation Links: Collapses into a mobile menu drawer on small screens -->
+        <nav class="nav-links" id="nav-menu">
+            <a href="#home" class="nav-item">Home</a>
+            <a href="#about" class="nav-item">About Us</a>
+            <a href="#contact" class="nav-item">Contact Us</a>
+            <button class="btn-appointment" id="appointment-btn">Book an Appointment</button>
+        </nav>
+    </header>
+
+    <!-- HOME SECTION: Main banner area with background placeholder -->
+    <section id="home" class="hero-section">
+        <div class="bg-placeholder">Home_page_BG</div>
+        <div class="hero-content">
+            <h1>Home_placeholder</h1>
+        </div>
+    </section>
+
+    <!-- ABOUT US SECTION: Multi-row layout showcasing two placeholder images -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About_Us_placeholder</h2>
+            
+            <!-- Row 1: Text on left, Image on right -->
+            <div class="about-row">
+                <div class="about-text">
+                    <h3>Row 1 Title</h3>
+                    <p>This is where your text for the first row will go.</p>
+                </div>
+                <div class="image-placeholder">Row_1_pic</div>
+            </div>
+
+            <!-- Row 2: Image on left, Text on right (handled by CSS grid) -->
+            <div class="about-row reverse">
+                <div class="about-text">
+                    <h3>Row 2 Title</h3>
+                    <p>This is where your text for the second row will go.</p>
+                </div>
+                <div class="image-placeholder">Row_2_pic</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & SUBSCRIBE SECTION: Form inputs and contact information -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact_Us_placeholder</h2>
+            
+            <!-- Newsletter Sign up feature -->
+            <div class="subscribe-box">
+                <h3>Subscribe to our News</h3>
+                <form id="subscribe-form">
+                    <input type="email" id="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-submit">Subscribe</button>
+                </form>
+                <!-- This message changes dynamically via javascript when submitted -->
+                <p id="subscribe-status" class="status-msg"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPOINTMENT POPUP: Hidden modal window that appears upon clicking booking button -->
+    <div id="appointment-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Book_an_Appointment_Placeholder</h2>
+            <p>Your appointment form or scheduler widget goes here.</p>
+        </div>
+    </div>
+
+    <!-- Links our logic functions to the JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
