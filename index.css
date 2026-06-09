@@ -2,7 +2,7 @@
    1. GLOBAL PAGE SETUP
    ========================================== */
 * {
-  box-sizing: border-box; /* Makes margins and padding sizing predictable */
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
 }
@@ -10,152 +10,186 @@
 html, body {
   height: 100%;
   font-family: sans-serif;
-  background-color: #83A67C; /* Your custom green shade */
+  background-color: #83A67C; 
   color: white;
+  overflow-x: hidden; /* Prevents unwanted horizontal mobile page shifting */
+}
+
+html {
+  scroll-behavior: smooth; 
 }
 
 /* ==========================================
-   2. NAVBAR STRUCTURE & ALIGNMENT (Mobile View)
+   2. FIXED NAVIGATION BAR & DROPDOWN MENU
    ========================================== */
 .navbar {
-  /* Layout Controls */
-  display: flex;
-  flex-direction: column;    /* Stacks elements vertically on phone displays */
-  align-items: center;       /* Centers everything horizontally */
-  gap: 20px;                 /* Adds a clean space between the logo and links */
-  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-
-  /* Modern Glass Styling Overlay */
+  z-index: 2000;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: flex-end; /* Places hamburger on top-right */
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.15); 
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px); /* Legacy Safari support */
+  backdrop-filter: blur(15px); 
+  -webkit-backdrop-filter: blur(15px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Tiny Logo Resizing Control */
-.nav-logo img {
-  height: 55px;              /* Standard, tidy header height constraint */
-  width: auto;               /* Keeps image dimensions from distorting */
-  display: block;
-}
-
-/* Navigation Links Container */
-.nav-links {
+.menu-toggle {
   display: flex;
-  flex-direction: column;    /* Stack text links top-to-bottom on mobile */
-  align-items: center;
-  gap: 15px;                 /* Generous touch targets for phone thumbs */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-/* Text Links Styling */
+.menu-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff; 
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nav-links {
+  display: none; 
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  background-color: rgba(43, 62, 40, 0.95); 
+  padding: 25px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-links.active {
+  display: flex;
+}
+
 .nav-links a {
-  color: white;
-  text-decoration: none;     /* Clears default ugly blue underline */
+  color: #ffffff; 
+  text-decoration: none;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #e2f0d9;            /* Soft pastel hover glow effect */
+  color: #e2f0d9;
 }
 
 /* ==========================================
-   3. LARGE SCREEN OVERRIDES (Desktop View)
+   3. HERO BANNER AND TEXT OVERLAYS
    ========================================== */
-@media (min-width: 768px) {
-  .navbar {
-    flex-direction: row;             /* Flipps container layout horizontally */
-    justify-content: space-between;  /* Throws logo to the left, links to the right */
-    padding: 15px 60px;              /* Wider margins on laptops and computers */
-  }
-
-  .nav-links {
-    flex-direction: row;             /* Displays text menu options side-by-side */
-    gap: 35px;                       /* Expands standard text option spacing */
-  }
-}
-/* ==========================================
-   4. SCROLLING AND FRAME LAYOUT EFFECTS
-   ========================================== */
-html {
-  /* This enables the smooth glide transition animation when clicking links */
-  scroll-behavior: smooth; 
-}
-
-/* This targets the big container holding your background logo image */
 .hero-bg-container {
-  min-height: 250vh; /* Forces the layout to be extra tall to enable massive scrolling */
+  min-height: 100vh;
   width: 100%;
-  padding: 180px 20px 80px 20px; /* Leaves breathing room below the fixed glass navbar */
-  
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 120px; /* Big vertical spaces between your content blocks */
-
-  /* Center Background Logo Setup (Positioned where your red circle was) */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;
+  padding: 140px 20px 60px 20px; 
+  
   background-image: url('public/ecu-logo.png');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: min(500px, 75vw); /* Responsive sizing: shrinks perfectly on mobile screens */
-  background-attachment: fixed;       /* The image stays perfectly frozen while cards glide over it */
+  background-size: min(450px, 75vw); /* Downsized slightly to fit well behind mobile frames */
+  background-attachment: fixed;       
 }
 
-/* Designing the white translucent layout frames */
+.hero-text-overlay {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 40px auto; /* Centers text block horizontally */
+  padding: 0 10px;
+}
+
+/* Fluid responsive text configurations */
+.hero-title {
+  font-size: clamp(34px, 10vw, 85px); /* Scales cleanly down to 34px on small mobile viewports */
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #233a1e; 
+  margin-bottom: 5px;
+  -webkit-text-stroke: 1px #94c382;
+  word-wrap: break-word;
+}
+
+.hero-subtitle {
+  font-size: clamp(12px, 3.5vw, 22px); 
+  font-weight: 600;
+  letter-spacing: 4px; /* Reduced mobile letter spacing prevents layout breakage */
+  color: #243d1f; 
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.5px #94c382;
+}
+
+/* ==========================================
+   4. LAYOUT FRAME CONTAINER CARDS
+   ========================================== */
 .content-frame {
-  background-color: rgba(255, 255, 255, 0.1); /* Translucent box backdrop layer */
-  backdrop-filter: blur(4px);                  /* Soft content frame inner blur */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 12px;
-  padding: 40px;
-  width: 90%;
+  padding: 30px 20px;
+  width: 90%; /* Forces standard equal gutters on mobile widths */
   max-width: 800px;
+  margin: 0 auto 60px auto; /* The auto assignment handles horizontal dead-centering */
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  
-  /* Scroll Margin: Prevents the fixed navbar header from cutting off titles when scrolling down */
-  scroll-margin-top: 120px; 
+  scroll-margin-top: 100px;
 }
 
 .content-frame h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #e2f0d9; /* Light contrast accent header text green color */
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #e2f0d9; 
 }
 
 .content-frame p {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   opacity: 0.9;
 }
+
 /* ==========================================
-   5. VISUAL TREE STRUCTURE LAYOUT (Mobile Default)
+   5. VISUAL TREE CHART STRUCTURE (Mobile Default)
    ========================================== */
 .tree-chart-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px; /* Vertical gap between the tiers */
+  gap: 30px; 
   width: 100%;
   margin-top: 20px;
 }
 
 .tree-row {
   display: flex;
-  flex-direction: column; /* Vertical fallback for phone screens */
+  flex-direction: column; 
   align-items: center;
   gap: 20px;
   width: 100%;
 }
 
-/* Individual Vertical Card Structure matching your drawing */
 .tree-card {
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
-  padding: 20px 15px;       /* Gives more breathing room inside the cards */
+  padding: 20px 15px;       
   width: 100%;
   max-width: 220px;
   text-align: center;
@@ -163,8 +197,8 @@ html {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  min-height: 160px;        /* Forces all cards to stay the exact same height */
-  justify-content: center;  /* Centers the text beautifully inside the card */
+  min-height: 160px;        
+  justify-content: center;  
 }
 
 .tree-icon {
@@ -186,38 +220,67 @@ html {
 }
 
 /* ==========================================
-   6. DESKTOP TREE HORIZONTAL EXPANSION OVERRIDES
+   6. RESPONSIVE DESKTOP OVERRIDES
    ========================================== */
+@media (min-width: 768px) {
+  .navbar {
+    justify-content: center; 
+    padding: 20px;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    position: static; 
+    flex-direction: row;
+    background-color: transparent; 
+    padding: 0;
+    gap: 40px;
+    width: auto;
+    border-bottom: none;
+  }
+  
+  .nav-links a {
+    color: #ffffff; 
+  }
+
+  .hero-title {
+    letter-spacing: 4px;
+  }
+
+  .hero-subtitle {
+    letter-spacing: 11px; 
+  }
+}
+
 @media (min-width: 900px) {
-  /* Forces content canvas box wrapper wide enough to hold 5 rows */
   .content-frame {
-    max-width: 1200px !important; 
+    max-width: 1100px; 
     width: 95%;
   }
 
-  /* Admin & Management Row expands horizontally */
   .tree-row.row-split {
     flex-direction: row;
     justify-content: center;
-    gap: 160px; /* Creates wide spacing to branch out under the CEO */
+    gap: 120px; 
   }
 
-  /* Bottom Row expands into 5 clean side-by-side elements */
   .tree-row.row-bottom-grid {
     flex-direction: row;
-    justify-content: space-between; /* Spreads out 5 items across the timeline axis */
+    justify-content: space-between; 
     gap: 15px;
     width: 100%;
   }
 
   .tree-card.specialist-card {
-    /* Auto scales cards smoothly without crashing text space bounds */
     flex: 1; 
-    max-width: 200px;
+    max-width: 180px;
   }
 }
 
-/* Fallback for medium tablet views so 5 cards wrap cleanly instead of squishing */
 @media (min-width: 600px) and (max-width: 899px) {
   .tree-row.row-split,
   .tree-row.row-bottom-grid {
@@ -227,276 +290,3 @@ html {
     gap: 20px;
   }
 }
-/* ==========================================
-   2. NAVBAR LINK DEAD-CENTER ALIGNMENT
-   ========================================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2000;
-  padding: 20px;
-  
-  /* Activates Flexbox to force items dead-center across the header line */
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  
-  /* Premium Glass Treatment Styles */
-  background-color: rgba(255, 255, 255, 0.12); 
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row; /* Lines links up horizontally side-by-side */
-  justify-content: center;
-  gap: 40px; /* Even spatial breathing gaps between text items */
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: #e2f0d9; /* Soft green pastel highlight tint on cursor hover */
-}
-
-/* ==========================================
-   3. HERO FRAME SECTION TEXT OVERLAY & LAYOUT EFFECTS
-   ========================================== */
-.hero-bg-container {
-  min-height: 100vh;
-  width: 100%;
-  
-  /* Forces strict top-to-bottom centering on mobile viewports */
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;     
-  text-align: center;
-  padding: 120px 20px 40px 20px; /* Generous top padding for the fixed navbar */
-  
-  background-image: url('public/ecu-logo.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: min(550px, 80vw); 
-  background-attachment: fixed;       
-}
-
-.hero-text-overlay {
-  animation: fadeInUp 1.2s ease-out;
-  width: 100%;
-  max-width: 100%;
-  padding: 0 10px;
-}
-
-/* MOBILE DEFAULT STYLES (Keeps text legible on phones) */
-.hero-title {
-  /* Lowered minimum size from 50px to 32px to fit inside mobile width margins */
-  font-size: clamp(32px, 8vw, 95px); 
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: #1a2e16; 
-  margin-bottom: 5px;
-
-  /* Replaced colliding stroke borders with a clean, high-contrast drop glow shadow */
-  text-shadow: 
-    -1.5px -1.5px 0 #fff,  
-     1.5px -1.5px 0 #fff,
-    -1.5px  1.5px 0 #fff,
-     1.5px  1.5px 0 #fff,
-     0px 4px 10px rgba(0,0,0,0.3);
-}
-
-.hero-subtitle {
-  /* Lowered minimum size to allow flexible wrapping on small devices */
-  font-size: clamp(12px, 3vw, 28px); 
-  font-weight: 600;
-  color: #243d1f;
-  
-  /* Reduced mobile letter spacing to stop text from shifting rightward */
-  letter-spacing: 4px; 
-  text-transform: uppercase;
-
-  /* Matches the crisp white text shadow treatment */
-  text-shadow: 
-    -1px -1px 0 #fff,  
-     1px -1px 0 #fff,
-    -1px  1px 0 #fff,
-     1px  1px 0 #fff;
-}
-
-/* Base style fix to guarantee content frames center perfectly */
-.content-frame {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
-  padding: 30px 20px;
-  width: 90%;
-  max-width: 1100px;
-  margin: 40px auto; /* "auto" horizontally centers the frames within the page space */
-  text-align: center;
-  scroll-margin-top: 90px;
-}
-
-/* ==========================================
-   4. DESKTOP VIEW SCREEN LAYOUT OVERRIDES (Restores the widescreen look)
-   ========================================== */
-@media (min-width: 768px) {
-  /* ... keep your existing .navbar and .nav-links rules inside here ... */
-
-  /* Restores your custom wide desktop text lengths */
-  .hero-title {
-    letter-spacing: 4px;
-  }
-
-  .hero-subtitle {
-    letter-spacing: 11.5px; /* Restores the exact width match for desktop screens */
-  }
-}
-
-/* ==========================================
-   2. NAVBAR & REWRITE WITH MOBILE HAMBURGER MENU
-   ========================================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2000;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: flex-end; /* Places hamburger on the top-right fold edge */
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.15); 
-  backdrop-filter: blur(15px); 
-  -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Designing the invisible button holding hamburger lines */
-.menu-toggle {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 26px;
-  height: 18px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.menu-toggle .bar {
-  width: 100%;
-  height: 3px;
-  background-color: #ffffff; /* Bright crisp white for clarity */
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Mobile Dropdown Hidden Menu Box State */
-.nav-links {
-  display: none; /* Stays completely hidden by default on phone widths */
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
-  position: absolute;
-  top: 100%; /* Drops open exactly below the bottom glass border line */
-  left: 0;
-  width: 100%;
-  background-color: rgba(43, 62, 40, 0.95); /* Deep solid forest tone for text contrast background overlay */
-  padding: 25px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* When active, JavaScript injects this class tag to display the mobile dropdown */
-.nav-links.active {
-  display: flex;
-}
-
-/* HIGH-CONTRAST HEADER HERO TEXT REWRITE */
-.nav-links a {
-  color: #ffffff; /* Crisp bright white stays easy to scan */
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.hero-title {
-  font-size: clamp(40px, 8vw, 75px);
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: #1a2e16; /* Replaced blending shades with deep premium shadow tone */
-  margin-bottom: 5px;
-}
-
-.hero-subtitle {
-  font-size: clamp(16px, 3vw, 24px);
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #243d1f; /* Enhanced contrast text color */
-}
-
-/* ==========================================
-   4. DESKTOP VIEW SCREEN LAYOUT RE-EXPANSION
-   ========================================== */
-@media (min-width: 768px) {
-  .navbar {
-    justify-content: center; /* Forces links dead-center on large viewports */
-    padding: 20px;
-  }
-
-  /* Hides mobile button line components completely on computer screens */
-  .menu-toggle {
-    display: none;
-  }
-
-  /* Unrolls navigation links horizontally dead-center in the header bar */
-  .nav-links {
-    display: flex;
-    position: static; /* Removes mobile positioning grid mechanics */
-    flex-direction: row;
-    background-color: transparent; /* Removes background dropdown colors */
-    padding: 0;
-    gap: 40px;
-    width: auto;
-    border-bottom: none;
-  }
-  
-  .nav-links a {
-    color: #253819; /* Crisp white overlay options on layout desktop fields */
-  }
-}
-/* Update your existing hero text selectors to match this */
-.hero-title {
-  font-size: clamp(100px, 8vw, 95px);
-  font-weight: 800;
-  letter-spacing: 4px;
-  color: #233a1e; /* Deep dark green inner fill */
-  margin-bottom: 5px;
-
-  /* Text Border Outline Code */
-  -webkit-text-stroke: 1.5px #94c382; /* Adds a crisp 1.5px white border contour */
-}
-
-.hero-subtitle {
-  font-size: clamp(16px, 3vw, 24px);
-  font-weight: 600;
-  letter-spacing: 11px;
-  color: #243d1f; /* Dark green inner fill */
-
-  /* Text Border Outline Code */
-  -webkit-text-stroke: 1px #94c382; /* Adds a crisp 1px white border contour */
-}
-
