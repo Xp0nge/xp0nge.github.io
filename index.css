@@ -15,6 +15,7 @@ html, body {
   background-color: #83A67C; 
   color: white;
   overflow-x: hidden;
+   scroll-behavior: smooth !important; /* Forces all viewports to animate transitions */
 }
 
 html {
